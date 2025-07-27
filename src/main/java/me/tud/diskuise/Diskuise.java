@@ -31,11 +31,6 @@ public final class Diskuise extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-        if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
-            getLogger().severe("Plugin not found: ProtocolLib");
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
-        }
 
         instance = this;
         addon = Skript.registerAddon(this);

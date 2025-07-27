@@ -3,7 +3,7 @@ package me.tud.diskuise.elements.entities.player.expressions;
 import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.doc.*;
 import ch.njol.util.coll.CollectionUtils;
-import com.comphenix.protocol.wrappers.WrappedGameProfile;
+import com.github.retrooper.packetevents.protocol.player.UserProfile;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.PlayerWatcher;
 import me.libraryaddict.disguise.utilities.DisguiseUtilities;
@@ -59,7 +59,7 @@ public class ExprSkin extends WatcherPropertyExpression<PlayerWatcher, String> {
             String name = offlinePlayer.getName();
             if (name == null)
                 return;
-            WrappedGameProfile profile = DisguiseUtilities.getGameProfile(name);
+            UserProfile profile = DisguiseUtilities.getUserProfile(name);
             if (profile == null)
                 return;
             playerWatcher.setSkin(profile);
@@ -76,7 +76,7 @@ public class ExprSkin extends WatcherPropertyExpression<PlayerWatcher, String> {
             public void onInfo(LibsMsg libsMsg, Object... objects) { }
 
             @Override
-            public void onSuccess(WrappedGameProfile wrappedGameProfile) {
+            public void onSuccess(UserProfile wrappedGameProfile) {
                 playerWatcher.setSkin(wrappedGameProfile);
             }
         });

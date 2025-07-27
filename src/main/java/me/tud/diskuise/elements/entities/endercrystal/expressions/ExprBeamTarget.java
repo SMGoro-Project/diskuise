@@ -3,7 +3,8 @@ package me.tud.diskuise.elements.entities.endercrystal.expressions;
 import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.doc.*;
 import ch.njol.util.coll.CollectionUtils;
-import com.comphenix.protocol.wrappers.BlockPosition;
+import com.github.retrooper.packetevents.util.Vector3i;
+import io.github.retrooper.packetevents.util.SpigotConversionUtil;
 import me.libraryaddict.disguise.disguisetypes.watchers.EnderCrystalWatcher;
 import me.tud.diskuise.util.skript.WatcherPropertyExpression;
 import org.bukkit.Location;
@@ -24,9 +25,9 @@ public class ExprBeamTarget extends WatcherPropertyExpression<EnderCrystalWatche
 
     @Override
     protected Location convert(EnderCrystalWatcher enderCrystalWatcher) {
-        BlockPosition blockPosition = enderCrystalWatcher.getBeamTarget();
+        Vector3i blockPosition = enderCrystalWatcher.getBeamTarget();
         if (blockPosition == null) return null;
-        return blockPosition.toLocation(enderCrystalWatcher.getDisguise().getEntity().getWorld());
+        return new Location(enderCrystalWatcher.getDisguise().getEntity().getWorld(), blockPosition.x, blockPosition.y, blockPosition.z);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class ExprBeamTarget extends WatcherPropertyExpression<EnderCrystalWatche
             case SET -> {
                 Location location = (Location) delta[0];
                 if (location == null) return;
-                enderCrystalWatcher.setBeamTarget(new BlockPosition(location.toVector()));
+                enderCrystalWatcher.setBeamTarget(SpigotConversionUtil.fromBukkitLocation(location).getPosition().toVector3i());
             }
         }
     }

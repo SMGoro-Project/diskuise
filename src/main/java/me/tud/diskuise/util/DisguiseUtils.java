@@ -40,7 +40,7 @@ public class DisguiseUtils {
     private static final HashMap<Entity, Disguise> ENTITY_LAST_DISGUISE = new HashMap<>();
     private static final TreeSpecies[] treeSpecies = TreeSpecies.values();
     private static final Parrot.Variant[] parrotVariants = Parrot.Variant.values();
-    private static final RabbitType[] rabbitTypes = RabbitType.values();
+    private static final Rabbit.Type[] rabbitTypes = Rabbit.Type.values();
     private static final TropicalFish.Pattern[] tropicalFishPatterns = TropicalFish.Pattern.values();
     private static Disguise lastCreatedDisguise = null;
 
@@ -136,13 +136,13 @@ public class DisguiseUtils {
             else if (watcher instanceof RabbitWatcher rabbitWatcher) {
                 int i = fields.getAndRemovePrimitive("type", int.class);
                 rabbitWatcher.setType(switch (i) {
-                    case 1 -> RabbitType.BLACK;
-                    case 2 -> RabbitType.PATCHES;
-                    case 3 -> RabbitType.BROWN;
-                    case 4 -> RabbitType.GOLD;
-                    case 5 -> RabbitType.PEPPER;
-                    case 6 -> RabbitType.KILLER_BUNNY;
-                    case 7 -> RabbitType.WHITE;
+                    case 1 -> Rabbit.Type.BLACK;
+                    case 2 -> Rabbit.Type.BLACK_AND_WHITE;
+                    case 3 -> Rabbit.Type.BROWN;
+                    case 4 -> Rabbit.Type.GOLD;
+                    case 5 -> Rabbit.Type.SALT_AND_PEPPER;
+                    case 6 -> Rabbit.Type.THE_KILLER_BUNNY;
+                    case 7 -> Rabbit.Type.WHITE;
                     default -> CollectionUtils.getRandom(rabbitTypes);
                 });
             }
